@@ -40,25 +40,79 @@ To visualize the yearly trend of company revenue and expenses from 2017 to 2023 
 
 ## Program / Code
 
-#Company Revenue and Expense Visualization using Matplotlib
-import matplotlib.pyplot as plt
-import numpy as np
+import matplotlib.pyplot as plt  
+import numpy as np  
 
-#Step 1: Create dataset
+years = np.arange(2017, 2024)  
+revenue = [42.0, 48.5, 55.0, 51.2, 66.8, 79.4, 92.5]  
+expenses = [31.0, 35.2, 39.8, 41.5, 46.0, 52.3, 58.6]  
 
-#Step 2: Plot Revenue and Expenses
+plt.figure(figsize=(8, 5))  
+plt.plot(  
+    years,  
+    revenue,        
+    color="green",  
+    linestyle="-",  
+    linewidth=2,  
+    marker="o",  
+    markersize=7,            
+    label="Revenue (Lakhs)",  
+)          
+plt.plot(  
+    years,  
+    expenses,    
+    color="red",    
+    linestyle="--",  
+    linewidth=2,  
+    marker="s",    
+    markersize=7,              
+    label="Expenses (Lakhs)",  
+)  
 
-#Step 3: Add titles, labels, and grid
+plt.title("Company Revenue vs. Expenses (2017 - 2023)", fontsize=14, fontweight="bold")  
+plt.xlabel("Year", fontsize=11)  
+plt.ylabel("Amount (in Lakhs)", fontsize=11)  
+plt.xticks(years)  
+plt.grid(True, linestyle="--", alpha=0.5)  
 
-#Step 4: Add legend
+plt.legend(loc="upper left", fontsize=10)  
 
-#Step 5: Annotate highest revenue and expense
+max_rev_idx = np.argmax(revenue)  
+max_exp_idx = np.argmax(expenses)  
+    
+peak_rev_year = years[max_rev_idx]  
+peak_rev_val = revenue[max_rev_idx]  
+peak_exp_year = years[max_exp_idx]  
+peak_exp_val = expenses[max_exp_idx]  
 
-#Step 6: Adjust layout and show plot
+plt.annotate(  
+    f"Peak Revenue: {peak_rev_val:.1f}L ({peak_rev_year})",  
+    xy=(peak_rev_year, peak_rev_val),  
+    xytext=(peak_rev_year - 2.1, peak_rev_val + 4.5),  
+    arrowprops=dict(arrowstyle="->", color="darkgreen", lw=1.5),  
+    fontsize=9.5,      
+    fontweight="bold",  
+    color="darkgreen",  
+)  
+
+plt.annotate(  
+    f"Peak Expenses: {peak_exp_val:.1f}L ({peak_exp_year})",  
+    xy=(peak_exp_year, peak_exp_val),  
+    xytext=(peak_exp_year - 2.3, peak_exp_val - 9.0),  
+    arrowprops=dict(arrowstyle="->", color="darkred", lw=1.5),  
+    fontsize=9.5,      
+    fontweight="bold",  
+    color="darkred",  
+)  
+print(f"Peak Revenue: {peak_rev_val:.1f} Lakhs in {peak_rev_year}")  
+print(f"Peak Expenses: {peak_exp_val:.1f} Lakhs in {peak_exp_year}")  
+
+ 
+plt.tight_layout()  
+plt.show()  
 
 ## Output
-
+<img width="818" height="532" alt="image" src="https://github.com/user-attachments/assets/0095da2c-df8c-4f63-958c-ad3b3f2c78fa" />
 
 ## Result
-
 The program successfully creates datasets for yearly company revenue and expenses and renders an annotated multi-line comparison chart using Matplotlib.
